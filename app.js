@@ -6,7 +6,10 @@ app.set("view engine","ejs")
 app.use(express.urlencoded({extended:true}))
 
 app.get("/",(req,res)=>{
-    res.render("Home")
+    fs.readdir("./files",(err,files)=>{
+
+        res.render("Home",{files})
+    })
 })
 
 app.get("/create",(req,res)=>{
@@ -26,6 +29,13 @@ app.post("/create",(req,res)=>{
         // console.log(req);
     })
     res.redirect("/")
+})
+
+app.get("/view/:fileName",(req,res)=>{
+    fs.readFile(`./files/${req.params.fileName}`,(err,data)=>{
+
+        res.render("View",{data})
+    })
 })
 
 app.listen(3000,()=>{
