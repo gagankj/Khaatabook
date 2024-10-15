@@ -4,7 +4,7 @@ const app=express()
 
 app.set("view engine","ejs")
 app.use(express.urlencoded({extended:true}))
-
+app.use(express.json())
 app.get("/",(req,res)=>{
     fs.readdir("./files",(err,files)=>{
 
@@ -40,4 +40,30 @@ app.get("/view/:fileName",(req,res)=>{
 
 app.listen(3000,()=>{
     console.log("Server is running at localhost:3000")
+})
+
+
+app.get("/edit/:editFile",(req,res)=>{
+    fs.readFile(`./files/${req.params.editFile}`,(err,data)=>{
+        res.render("Edit",{data,fileName:req.params.editFile})
+    })
+})
+
+app.post("/append/:filename",(req,res)=>{
+    fs.writeFile(`./files/${req.params.filename}`,req.body.details,(err)=>{
+        if (err) throw err
+    })
+    res.redirect("/")
+//    console.log(req.body);
+})
+
+
+
+
+app.get("/delete/:filename",(req,res)=>{
+    fs.unlink(`./files/${req.params.filename}`,(err)=>{
+        if (err) throw err
+    })
+
+    res.redirect("/")
 })

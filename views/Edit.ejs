@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KhaataBook</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="h-screen  p-4 text-green-500  w-screen bg-zinc-800">
+<div class="flex justify-between">
+
+    <h1 class="">KhaataBook</h1>
+    <div>
+        
+        <a class="text-yellow-500 mr-10" href="/">Home</a>
+        
+    </div>
+</div>
+<form class="flex flex-col" action="/append/<%=fileName%>" method="post">
+    <input class="p-2 rounded-md h-44 w-1/3 border-none outline-none text-white overflow-hidden bg-zinc-700" name="details" type="text" value="<%= data%>">
+    <input class="bg-blue-500 px-4 w-44 py-1 text-white rounded-md" type="submit">
+</form>
+    </div>
+    
+</body>
+</html>
